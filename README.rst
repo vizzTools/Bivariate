@@ -52,4 +52,4 @@ TODO
 * Add classifier for raster data
 
 
-.. _`bivariate palette generator`: https://observablehq.com/@benjaminadk/bivariate-choropleth-color-generator"
+.. _`bivariate palette generator`: https://observablehq.com/@benjaminadk/bivariate-choropleth-color-generator
