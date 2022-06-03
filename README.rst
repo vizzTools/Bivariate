@@ -17,18 +17,27 @@ Straighforward tool to help you in your bivariate maps journey
 
 
 * Free software: MIT license
-* Documentation: https://bivariate.readthedocs.io.
+* Documentation: https://bivariate.readthedocs.io. (Not yet)
 
+Usage
+-----
 
-Features
---------
+Simply select your prefered color palette from `bivariate palette generator`_, copy the color list and::
+        from bivariate import BivariateColorMap
 
-* TODO
+        palette = ["#e8e8e8", "#d9a4a4", "#c85a5a", "#a7cad3", "#a7a4a4", "#a75a5a", "#64acbe", "#64a4a4", "#645a5a"]
+        bivar = BivariateColorMap(palette)
+        bivar.plot_color_square()
 
-Credits
--------
+Then, if you are using a DataFrame or GeoDataFrame, to compute the the classes simply do::
+        classes = bivar.classify(data.var1, data.var2)
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+And, with geopandas, plot the resulting bivariate map with::
+        data.plot(color=classes.map(bivar.cmap()), categorical=True, figsize=(14, 14))
+        bivar.plot_color_square(show_labels=False)
+        plt.plot()
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+TODO
+----
+
+* Add classifier for raster data
