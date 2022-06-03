@@ -49,10 +49,13 @@ And, with :code:`geopandas`, plot the resulting bivariate map with
 
 .. image:: docs/bivarmap.png
         :width: 400
+
 TODO
 ----
 
 * Add classifier for raster data
+* Fix the installation of the package
+* Add installation instructions
 
 
 .. _`bivariate palette generator`: https://observablehq.com/@benjaminadk/bivariate-choropleth-color-generator
