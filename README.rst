@@ -46,6 +46,9 @@ And, with :code:`geopandas`, plot the resulting bivariate map with
         bivar.plot_color_square(show_labels=False)
         plt.plot()
 
+
+.. image:: docs/bivarmap.png
+        :width: 400
 TODO
 ----
 
