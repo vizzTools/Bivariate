@@ -1,23 +1,23 @@
 =========
-bivariate
+Bivariate
 =========
-
-
-.. image:: https://img.shields.io/pypi/v/bivariate.svg
-        :target: https://pypi.python.org/pypi/bivariate
-
-.. image:: https://img.shields.io/travis/bielstela/bivariate.svg
-        :target: https://travis-ci.com/bielstela/bivariate
-
-.. image:: https://readthedocs.org/projects/bivariate/badge/?version=latest
-        :target: https://bivariate.readthedocs.io/en/latest/?version=latest
-        :alt: Documentation Status
-
 Straighforward tool to help you in your bivariate maps journey
 
+Installation
+------------
+This package is not available on PyPi so it must be installed from git
 
-* Free software: MIT license
-* Documentation: https://bivariate.readthedocs.io. (Not yet)
+.. code-block:: console
+
+    $ pip install git+https://github.com/vizzTools/Bivariate.git
+
+or locally from the cloned repository by doing
+
+.. code-block:: console
+
+    $ pip install .
+
+If you have issues installing either from git or locally, check that pip version is >= 19. (Why: https://github.com/python-poetry/poetry/issues/321)
 
 Usage
 -----
