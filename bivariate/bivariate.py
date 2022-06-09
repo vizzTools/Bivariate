@@ -10,19 +10,52 @@ from matplotlib.colors import to_rgba_array
 
 
 class BivariateColorMap:
+    """Create a bivariate color map from a list of colors.
+
+    Attributes
+    ----------
+    colors: list
+        list of colors to use for the bivariate color map
+    n_rows: int
+        number of rows in the bivariate color map or the size of the square of colors
+    label_letters: list
+        letter codes for first variable. The length of this list is n_rows.
+    label_numbers: list
+        numeric codes for second variable. The length of this list is n_rows.
+    labels: list
+        labels used in the classification of the data. The length of this list is n_rows**2.
+    """
+
     def __init__(self, colors: list[str]):
+        """Initialize the bivariate color map.
+
+        To create a list of valid colors, use the following tool to make your own list of colors:
+        https://observablehq.com/@benjaminadk/bivariate-choropleth-color-generator
+
+        Parameters
+        ----------
+        colors: list
+            List of colors to use for the bivariate color map
+        """
         if not self._is_square(len(colors)):
-            raise ValueError("The number of colors must be a square.")
+            raise ValueError("The length of colors must be a square number like 9 (3*3), 16 (4*4)...")
         self.colors = colors
         self.n_rows = math.isqrt(len(colors))
         self.label_letters, self.label_numbers, self.labels = self._make_labels()
 
+    @property
+    def cmap(self) -> dict[str:str]:
+        """Map of labels to colors."""
+        return dict(zip(self._sorted_labels(reverse=False), self.colors))
+
     @staticmethod
     def _is_square(n: int) -> bool:
+        """Check if n is a square number."""
         return n == math.isqrt(n) ** 2
 
     def _make_labels(self) -> tuple[list[str], list[str], list[str]]:
-        """Makes a list of labels for the bivariate color map of length n_rows**2.
+        """Make a list of labels for the bivariate color map of length n_rows**2.
+
         The labels are a combination of the letters A-Z and the numbers 1-9.
 
         Returns
@@ -43,16 +76,20 @@ class BivariateColorMap:
         )
 
     def _sorted_labels(self, reverse: bool = True) -> list[str]:
-        """Sorted labels by number
+        """Sort labels by number.
 
         Used to match the order of the colors produced by
         https://observablehq.com/@benjaminadk/bivariate-choropleth-color-generator"
-        like: `["A3", "B3", "C3", "A2", "B2" ...]`
+
+        Parameters
+        ----------
+        reverse: bool
+            Reverse the order of the labels by number like: `["A3", "B3", "C3", "A2", "B2" ...]`
         """
         return sorted(self.labels, key=lambda x: x[1], reverse=reverse)
 
     def plot_color_square(self, show_labels=True) -> plt.Axes:
-        """Plots the square of colors with the corresponding labels.
+        """Plot the square of colors with the corresponding labels.
 
         Parameters
         ----------
@@ -70,12 +107,21 @@ class BivariateColorMap:
                 ax.text(ij[1], ij[0], label, ha="center", va="center", color="w")
         return ax
 
-    def cmap(self) -> dict[str:str]:
-        """Returns a map of labels to colors."""
-        return dict(zip(self._sorted_labels(reverse=False), self.colors))
-
     def classify(self, var1: pd.Series, var2: pd.Series) -> pd.Series:
-        """Classifies the data using the bivariate color map."""
+        """Classifies the data using the bivariate color map.
+
+        Parameters
+        ----------
+        var1: pd.Series
+            First variable to classify
+        var2: pd.Series
+            Second variable to classify
+
+        Returns
+        -------
+        pd.Series
+            Series of labels for the bivariate color map
+        """
         cls_var1 = pd.Series(NaturalBreaks(var1, self.n_rows).yb).map({k: v for k, v in enumerate(self.label_letters)})
         cls_var2 = pd.Series(NaturalBreaks(var2, self.n_rows).yb).map({k: v for k, v in enumerate(self.label_numbers)})
         return cls_var1 + cls_var2

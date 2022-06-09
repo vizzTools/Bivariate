@@ -13,7 +13,6 @@ class TestBivariateColorMap:
         bad_length_colors = COLORS_9 + ["#ffffff"]  # 10 colors is not a square number
         with pytest.raises(ValueError) as exc:
             bivariate.BivariateColorMap(bad_length_colors)
-        assert "The number of colors must be a square." in str(exc.value)
 
     def test_make_labels(self):
         bivar = bivariate.BivariateColorMap(COLORS_9)
@@ -40,4 +39,4 @@ class TestBivariateColorMap:
             "B3": "#a664ac",
             "C3": "#5a64ac",
         }
-        assert bivar.cmap() == expected_cmap
+        assert bivar.cmap == expected_cmap
