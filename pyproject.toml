@@ -56,6 +56,8 @@ typeguard = ">=2.13.3"
 xdoctest = {extras = ["colors"], version = ">=0.15.10"}
 myst-parser = {version = ">=0.16.1"}
 flakeheaven = {version = ">=1.0.1"}
+jupyterlab = "^3.4.3"
+geopandas = "^0.10.2"
 
 # black is the tool to format the source code
 [tool.black]
