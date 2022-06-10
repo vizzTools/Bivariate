@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry]
 name = "bivariate"
-version = "0.1.0"
+version = "0.2.0"
 description = "Straighforward tool to help you in your bivariate maps journey"
 authors = ["Biel Stela <biel.stela@vizzuality.com>"]
 license = "MIT license"
